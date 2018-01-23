@@ -1,7 +1,11 @@
-返回键值说明：
-visibility = 4 ： 搜索,及分类均可见
-status = 1 : 正常(Enabled)
-http://devdocs.magento.com/swagger/#/
+**资料**
+    http://devdocs.magento.com/swagger/#/
+
+**返回键值说明**：
+
+    visibility = 4 ： 搜索,及分类均可见
+    status = 1 : 正常(Enabled)
+
 
 **客户**
 
