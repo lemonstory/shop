@@ -23,7 +23,7 @@ http://devdocs.magento.com/swagger/#/
             Authorization Bearer {token}
             Content-Type application/json
     
-#####分类
+**分类**
     
     获取所有分类[不推荐使用]
         GET /V1/categories/{categoryId}
@@ -47,7 +47,7 @@ http://devdocs.magento.com/swagger/#/
         http://dev.magento.com/index.php/rest/V1/categories/5
         
         
-#####商店
+**商店**
     
     获取所有的商店
          ````GET /V1/store/storeViews
@@ -66,7 +66,7 @@ http://devdocs.magento.com/swagger/#/
         
         product_count: 所有产品信息包含(Visibility = Not Visible Individually)
 
-#####商品
+**商品**
 
 
 
@@ -87,10 +87,11 @@ http://devdocs.magento.com/swagger/#/
        http://dev.magento.com/index.php/rest/V1/products/女孩衣服
    
 
-#####商品评论
+**商品评论**
      无
      
-#####购物车
+     
+**购物车**
      获取购物车信息
          GET /V1/carts/mine
          http://dev.magento.com/index.php/rest/V1/carts/mine
