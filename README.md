@@ -3,7 +3,7 @@ visibility = 4 ： 搜索,及分类均可见
 status = 1 : 正常(Enabled)
 http://devdocs.magento.com/swagger/#/
 
-#####客户
+**客户**
 
     创建客户访问令牌(auth token)
         POST /V1/integration/customer/token
@@ -50,8 +50,8 @@ http://devdocs.magento.com/swagger/#/
 #####商店
     
     获取所有的商店
-        `GET /V1/store/storeViews
-         http://dev.magento.com/index.php/rest/V1/store/storeViews`
+         ````GET /V1/store/storeViews
+         http://dev.magento.com/index.php/rest/V1/store/storeViews
         
     
     获取商店信息
