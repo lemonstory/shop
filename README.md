@@ -1,3 +1,8 @@
+**存在的问题**
+    地址接口中的region信息
+    customer auth token 有效期
+    
+
 **资料**
     http://devdocs.magento.com/swagger/#/
 
@@ -166,9 +171,126 @@
             itemId：购物车中商品id
        
 **收获地址**
+    
+    文档
+    https://magento.stackexchange.com/questions/197887/magento-2-rest-api-update-single-customer-address
+            
+    获取客户地址信息(同获取用户信息接口)
+        customerCustomerRepositoryV1
+        GET /V1/customers/me
+        http://dev.magento.com/rest/V1/customers/me
+    
+        Header:
+            Authorization Bearer {token}
+            Content-Type application/json
+            
+        备注：
+            default_billing: true   //默认账单地址
+            default_shipping: true  //默认物流地址
+    
+    获取默认的物流地址【不推荐使用】
+        customerAccountManagementV1
+        GET /V1/customers/me/shippingAddress
+        http://dev.magento.com/index.php/rest/V1/customers/me/shippingAddress
         
+        {
+            "id": 2,                    //地址id
+            "customer_id": 2,           //客户id
+            "region": {                 //区域信息
+                "region_code": null,
+                "region": null,
+                "region_id": 0
+            },
+            "region_id": 0,             //区域id
+            "country_id": "CN",         //国家
+            "street": [
+                "北京的地址1",            //街道信息1
+                "北京的地址2"             //街道信息2
+            ],
+            "telephone": "18600001234", //手机号
+            "postcode": "710065",       //邮政编码
+            "city": "北京市",            //城市
+            "firstname": "黄",          //名字
+            "lastname": "元",           //姓氏
+            "default_shipping": true    //是否是默认物流地址
+        }
         
-
+    添加/添加并设置为默认地址/修改/删除/物流地址:
+        customerCustomerRepositoryV1
+        PUT /V1/customers/me
+        http://dev.magento.com/rest/V1/customers/me
+        
+        $Body 值
+        {
+            "customer": {
+                "id": 2,
+                "group_id": 1,
+                "default_billing": "1",
+                "default_shipping": "2",
+                "created_at": "2018-01-23 13:36:44",
+                "updated_at": "2018-01-24 07:33:16",
+                "created_in": "Default Store View",
+                "email": "huangyuan@xiaoningmeng.net",
+                "firstname": "黄",
+                "lastname": "元",
+                "store_id": 1,
+                "website_id": 1,
+                "addresses": [
+                    {
+                        "id": 2,
+                        "customer_id": 2,
+                        "region": {
+                            "region_code": null,
+                            "region": null,
+                            "region_id": 0
+                        },
+                        "region_id": 0,
+                        "country_id": "CN",
+                        "street": [
+                            "北京的地址1",
+                            "北京的地址2"
+                        ],
+                        "telephone": "18600001234",
+                        "postcode": "710065",
+                        "city": "北京市",
+                        "firstname": "黄",
+                        "lastname": "元",
+                        "default_shipping": true
+                    },
+                    {
+                        "customer_id": 2,
+                        "region": {
+                            "region_code": null,
+                            "region": null,
+                            "region_id": 0
+                        },
+                        "region_id": 0,
+                        "country_id": "CN",
+                        "street": [
+                            "北京的地址1111",
+                            "北京的地址22222"
+                        ],
+                        "telephone": "18600001234",
+                        "postcode": "710065",
+                        "city": "北京市",
+                        "firstname": "黄",
+                        "lastname": "元",
+                        "default_shipping": false
+                    }
+                ],
+                "disable_auto_group_change": 0
+            }
+        }
+        
+        备注：
+            添加,修改,删除 物流地址实际上调用的是修改用户信息的接口.
+            Tips:
+                请求类型为PUT
+                发送请求是Body部分的根节点为：customer(获取用户信息的返回值没有该节点)
+                添加地址时：是在addresses数组中增加一项,后发起put请求提交
+                添加地址且将该地址设置为默认地址时：被添加项的default_shipping赋值为true即可
+                修改地址时：修改addresses的地址项,后发起put请求提交
+                删除地址时：删除addresses的地址项,后发起put请求提交
         
 
 
