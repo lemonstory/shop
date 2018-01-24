@@ -118,10 +118,57 @@
          
         Authorization Bearer {token}
         Content-Type application/json
-         
-     添加商品至购物车
+        
+    查看购物车中的商品
+       quoteCartItemRepositoryV1
+       GET /V1/carts/mine/items
+       http://dev.magento.com/index.php/rest/V1/carts/mine/items
+       
+       Authorization Bearer {token}
+       Content-Type application/json
+        
+    添加商品至购物车
+       quoteCartItemRepositoryV1
+       POST /V1/carts/mine/items
+        
+       POST参数
+       {
+           "cartItem": {
+               "sku": "111法师法师法师",     //商品sku
+               "qty": 1,                   //商品数量
+               "name": "111法师法师法师",    //商品名称
+               "product_type": "simple",   //商品
+               "quote_id": "3"             //购物车id (获取购物车信息 id)
+           }
+       }
+        
+    修改购物车某一种商品数量(覆盖)
+       quoteCartItemRepositoryV1
+       POST /V1/carts/mine/items
+        
+       POST参数
+       {
+           "cartItem": {
+               "item_id": "10",            //商品在购物车中的id【重要】
+               "qty": 1,                   //商品数量 (覆盖旧值)
+               "name": "111法师法师法师",    //商品名称
+               "product_type": "simple",   //商品
+               "quote_id": "3"             //购物车id (获取购物车信息 id)
+           }
+       }
+        
+    删除购物车中的商品
         quoteCartItemRepositoryV1
-        POST /V1/carts/mine/items
+        DELETE /V1/carts/mine/items/{itemId}
+        http://dev.magento.com/index.php/rest/V1/carts/mine/items/10
+        
+        Path参数
+            itemId：购物车中商品id
+       
+**收获地址**
+        
+        
+
         
 
 
