@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!--https://github.com/magento/magento2/issues/9570-->
+    <route url="/V1/gmart/products/:sku/reviews" method="GET">
+        <service class="Gmart\Review\Api\ReviewManagementInterface" method="getProductReviews"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/aaa/name/:name" method="GET">
+        <service class="Gmart\Review\Api\HelloworldInterface" method="name"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

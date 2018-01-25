@@ -1,5 +1,5 @@
 <?php
-namespace Ewall\Mobileshop\Observer;
+namespace Gmart\Mobileshop\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Catalog\Api\ProductRepositoryInterfaceFactory as ProductRepository;
 use Magento\Catalog\Helper\ImageFactory as ProductImageHelper;

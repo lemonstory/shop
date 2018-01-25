@@ -1,9 +1,19 @@
+**环境相关**
+
+    Your domain:                  shop.xiaoningmeng.net
+    Virtualhost conf:             /usr/local/nginx/conf/vhost/shop.xiaoningmeng.net.conf
+    Directory of:                 /data/wwwroot/shop.xiaoningmeng.net
+    Let's Encrypt SSL Certificate:/etc/letsencrypt/live/shop.xiaoningmeng.net/fullchain.pem
+    SSL Private Key:              /etc/letsencrypt/live/shop.xiaoningmeng.net/privkey.pem
+
 **存在的问题**
+
     地址接口中的region信息
     customer auth token 有效期
     
 
 **资料**
+
     http://devdocs.magento.com/swagger/#/
 
 **返回键值说明**：
@@ -115,6 +125,9 @@
      
      
 **购物车**
+    
+    文档
+    https://www.ipragmatech.com/magento-mobile-app-shopping-cart/
 
     获取购物车信息
         quoteCartManagementV1
@@ -169,6 +182,9 @@
         
         Path参数
             itemId：购物车中商品id
+            
+    清空购物车
+        
        
 **收获地址**
     
@@ -292,6 +308,6 @@
                 修改地址时：修改addresses的地址项,后发起put请求提交
                 删除地址时：删除addresses的地址项,后发起put请求提交
         
-
+    
 
 
