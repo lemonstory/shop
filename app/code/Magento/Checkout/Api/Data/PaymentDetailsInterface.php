@@ -55,6 +55,7 @@ interface PaymentDetailsInterface
      * @param \Magento\Checkout\Api\Data\PaymentDetailsExtensionInterface $extensionAttributes
      * @return $this
      */
-    //
-    public function setExtensionAttributes($extensionAttributes);
+    public function setExtensionAttributes(
+        \Magento\Checkout\Api\Data\PaymentDetailsExtensionInterface $extensionAttributes
+    );
 }
