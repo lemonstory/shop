@@ -48,6 +48,7 @@ class PaymentDetails extends \Magento\Framework\Model\AbstractExtensibleModel im
      *
      * @return \Magento\Checkout\Api\Data\PaymentDetailsExtensionInterface|null
      */
+    //\Magento\Checkout\Api\Data\PaymentDetailsExtensionInterface
     public function getExtensionAttributes()
     {
         return $this->_getExtensionAttributes();
@@ -60,7 +61,7 @@ class PaymentDetails extends \Magento\Framework\Model\AbstractExtensibleModel im
      * @return $this
      */
     public function setExtensionAttributes(
-        \Magento\Checkout\Api\Data\PaymentDetailsExtensionInterface $extensionAttributes
+        $extensionAttributes
     ) {
         return $this->_setExtensionAttributes($extensionAttributes);
     }
