@@ -69,7 +69,7 @@
         "ext-zip": "*",
         "ext-pdo_mysql": "*",
         "ext-soap": "*",
-        "sjparkinson/static-review": "~4.1",
+        "phpro/grumphp": "*",
         "ramsey/uuid": "3.7.1"
     },
     "require-dev": {
