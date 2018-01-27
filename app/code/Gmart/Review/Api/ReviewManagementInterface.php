@@ -19,10 +19,19 @@ interface ReviewManagementInterface
     public function getCustomerReviews($customerId);
 
     /**
-     * Get product reviews.
+     * Get product reviews with sku.
      *
      * @param string $sku
      * @return ReviewInterface[]
      */
     public function getProductReviews($sku);
+
+
+    /**
+     * Get product reviews with productId.
+     *
+     * @param string $productId
+     * @return ReviewInterface[]
+     */
+    public function getProductReviewsWithProductId($productId);
 }

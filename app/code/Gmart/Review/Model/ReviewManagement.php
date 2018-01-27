@@ -8,6 +8,7 @@
 
 namespace Gmart\Review\Model;
 
+use Gmart\Review\Api\ReviewInterface;
 use Gmart\Review\Api\ReviewManagementInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product\Gallery\MimeTypeExtensionMap;
@@ -54,37 +55,63 @@ class ReviewManagement implements ReviewManagementInterface
     public function getProductReviews($sku)
     {
         // TODO: Implement getProductReviews() method.
-        echo "hha";
-//        $sku = 'A-01';
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-//        var_dump($objectManager);
-//        $product = $objectManager->create("Magento\Catalog\Model\Product")->loadByAttribute('sku', $sku); //use load($producID) if you have product id
-//
-//        var_dump($product);
-        exit;
+        $data = [];
+        if(!empty($sku)) {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $product = $objectManager->create("Magento\Catalog\Model\Product")->loadByAttribute('sku', $sku); //use load($producID) if you have product id
+            if($product) {
 
-//        if($product) {
-//
-//
-//
-//            $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
-//            $currentStoreId = $storeManager->getStore()->getId();
-//            $rating = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
-//
-//            $collection = $rating->addStoreFilter(
-//                $currentStoreId
-//            )->addStatusFilter(
-//                \Magento\Review\Model\Review::STATUS_APPROVED
-//            )->addEntityFilter(
-//                'product',
-//                $product->getId()
-//            )->setDateOrder();
-//
-//            print_r($collection->getData()); //Get all review data of product
-//
-//        }
+                $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+                $currentStoreId = $storeManager->getStore()->getId();
+                $rating = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
 
+                $collection = $rating->addStoreFilter(
+                    $currentStoreId
+                )->addStatusFilter(
+                    \Magento\Review\Model\Review::STATUS_APPROVED
+                )->addEntityFilter(
+                    'product',
+                    $product->getId()
+                )->setDateOrder();
 
+                $data = $collection->getData(); //Get all review data of product
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * Get product reviews with productId.
+     *
+     * @param string $productId
+     * @return ReviewInterface[]
+     */
+    public function getProductReviewsWithProductId($productId)
+    {
+        // TODO: Implement getProductReviewsWithProductId() method.
+        $data = [];
+        if(!empty($productId)) {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $product = $objectManager->create("Magento\Catalog\Model\Product")->load($productId); //use load($producID) if you have product id
+            if($product) {
+
+                $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+                $currentStoreId = $storeManager->getStore()->getId();
+                $rating = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
+
+                $collection = $rating->addStoreFilter(
+                    $currentStoreId
+                )->addStatusFilter(
+                    \Magento\Review\Model\Review::STATUS_APPROVED
+                )->addEntityFilter(
+                    'product',
+                    $product->getId()
+                )->setDateOrder();
+
+                $data = $collection->getData(); //Get all review data of product
+            }
+        }
+        return $data;
 
     }
 }

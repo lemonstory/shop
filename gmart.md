@@ -1,3 +1,6 @@
+haha
+
+llll
 **环境相关**
 
     Your domain:                  shop.xiaoningmeng.net
@@ -121,7 +124,32 @@
    
 
 **商品评论**
-     无
+     
+     根据商品id获取评论
+     GET /V1/gmart/products/id/{productId}/reviews
+     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews
+     
+     
+     根据商品sku获取评论
+     GET /V1/gmart/products/{sku}/reviews
+     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews
+        [
+         {
+             "review_id": "348",
+             "created_at": "2018-01-27 13:29:00",
+             "entity_id": "1",
+             "entity_pk_value": "6",
+             "status_id": "1",
+             "detail_id": "348",
+             "title": "看起来还不错",
+             "detail": "看起来还不错，看起来还不错，看起来还不错",
+             "nickname": "帅帅",
+             "customer_id": null,
+             "entity_code": "product"
+         }
+         ...
+        ]
+     
      
      
 **购物车**

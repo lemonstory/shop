@@ -25,6 +25,11 @@
     
     //设置为生成环境
     php bin/magento deploy:mode:set production
+    //设置为开发模式
+    php bin/magento deploy:mode:set developer
+    
+    //生成静态文件
+    php bin/magento setup:static-content:deploy -f
     
 *设置线上环境*
 

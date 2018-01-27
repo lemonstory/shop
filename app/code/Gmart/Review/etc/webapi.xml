@@ -9,6 +9,13 @@
         </resources>
     </route>
 
+    <route url="/V1/gmart/products/id/:productId/reviews" method="GET">
+        <service class="Gmart\Review\Api\ReviewManagementInterface" method="getProductReviewsWithProductId"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
     <route url="/V1/aaa/name/:name" method="GET">
         <service class="Gmart\Review\Api\HelloworldInterface" method="name"/>
         <resources>
