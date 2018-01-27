@@ -3,6 +3,9 @@ return array (
   'modules' => 
   array (
     'Magento_Store' => 1,
+    'Gmart_Mobileshop' => 1,
+    'Gmart_Review' => 1,
+    'Inchoo_Helloworld' => 1,
     'Magento_Directory' => 1,
     'Magento_AdvancedPricingImportExport' => 1,
     'Magento_Config' => 1,
