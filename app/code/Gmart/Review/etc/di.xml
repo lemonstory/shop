@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Gmart\Review\Api\ReviewRepositoryInterface" type="Gmart\Review\Model\ReviewRepository" />
+    <preference for="Gmart\Review\Api\ReviewManagementInterface" type="Gmart\Review\Model\ReviewManagement" />
+
+    <preference for="Gmart\Review\Api\HelloworldInterface" type="Gmart\Review\Model\Helloworld" />
+
+</config>
