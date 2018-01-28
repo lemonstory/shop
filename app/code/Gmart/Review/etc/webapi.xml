@@ -2,14 +2,14 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <!--https://github.com/magento/magento2/issues/9570-->
-    <route url="/V1/gmart/products/:sku/reviews" method="GET">
+    <route url="/V1/gmart/products/:sku/reviews/:curPage/:pageSize" method="GET">
         <service class="Gmart\Review\Api\ReviewManagementInterface" method="getProductReviews"/>
         <resources>
             <resource ref="anonymous" />
         </resources>
     </route>
 
-    <route url="/V1/gmart/products/id/:productId/reviews" method="GET">
+    <route url="/V1/gmart/products/id/:productId/reviews/:curPage/:pageSize" method="GET">
         <service class="Gmart\Review\Api\ReviewManagementInterface" method="getProductReviewsWithProductId"/>
         <resources>
             <resource ref="anonymous" />

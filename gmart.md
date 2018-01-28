@@ -134,8 +134,8 @@
 **商品评论**
      
      根据商品id获取评论
-     GET /V1/gmart/products/id/{productId}/reviews
-     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews
+     GET /V1/gmart/products/id/{productId}/reviews/{curPage}/{pageSize}
+     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews/1/4
      返回值：
          [
               {
@@ -156,8 +156,8 @@
          ]
      
      根据商品sku获取评论
-     GET /V1/gmart/products/{sku}/reviews
-     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews
+     GET /V1/gmart/products/{sku}/reviews/{curPage}/{pageSize}
+     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews/1/4
      
      
      发布评论

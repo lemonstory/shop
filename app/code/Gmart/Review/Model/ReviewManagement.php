@@ -50,45 +50,49 @@ class ReviewManagement implements ReviewManagementInterface
      * Get product reviews.
      *
      * @param string $sku
+     * @param int $curPage
+     * @param int $pageSize
      * @return ReviewInterface[]
      */
-    public function getProductReviews($sku)
+    public function getProductReviews($sku,$curPage,$pageSize)
     {
         // TODO: Implement getProductReviews() method.
         $dataReviews = [];
-        if(!empty($productId)) {
+        if(!empty($sku)) {
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $product = $objectManager->create("Magento\Catalog\Model\Product")->loadByAttribute('sku', $sku); //use load($producID) if you have product id
             if($product) {
 
                 $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
                 $reviewsColFactory = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
-                $reviews = $reviewsColFactory->addStoreFilter(
-                    $storeManager->getStore()->getId()
-                )->addStatusFilter(
-                    \Magento\Review\Model\Review::STATUS_APPROVED
-                )->addEntityFilter(
-                    'product',
-                    $product->getId()
-                )->setDateOrder()->addRateVotes();
+                $reviews = $reviewsColFactory->addStoreFilter($storeManager->getStore()->getId())
+                    ->addStatusFilter(\Magento\Review\Model\Review::STATUS_APPROVED)
+                    ->addEntityFilter('product',$product->getId())
+                    ->setCurPage($curPage)
+                    ->setPageSize($pageSize)
+                    ->setDateOrder()
+                    ->addRateVotes();
+
 
                 foreach ($reviews->getItems() as $key => $review) {
 
-                    $dataReviews[]['review_id'] = $review->getReviewId();
-                    $dataReviews[]['created_at'] = $review->getCreatedAt();
-                    $dataReviews[]['entity_id'] = $review->getEntityId();
-                    $dataReviews[]['entity_pk_value'] = $review->getEntityPkValue();
-                    $dataReviews[]['status_id'] = $review->getStatusId();
-                    $dataReviews[]['detail_id'] = $review->getDetailId();
-                    $dataReviews[]['title'] = $review->getTitle();
-                    $dataReviews[]['detail'] = $review->getDetail();
-                    $dataReviews[]['nickname'] = $review->getNickname();
-                    $dataReviews[]['customer_id'] = $review->getCustomerId();
-                    $dataReviews[]['entity_code'] = $review->getEntityCode();
+                    $dataReviewsItem['review_id'] = $review->getReviewId();
+                    $dataReviewsItem['created_at'] = $review->getCreatedAt();
+                    $dataReviewsItem['entity_id'] = $review->getEntityId();
+                    $dataReviewsItem['entity_pk_value'] = $review->getEntityPkValue();
+                    $dataReviewsItem['status_id'] = $review->getStatusId();
+                    $dataReviewsItem['detail_id'] = $review->getDetailId();
+                    $dataReviewsItem['title'] = $review->getTitle();
+                    $dataReviewsItem['detail'] = $review->getDetail();
+                    $dataReviewsItem['nickname'] = $review->getNickname();
+                    $dataReviewsItem['customer_id'] = $review->getCustomerId();
+                    $dataReviewsItem['entity_code'] = $review->getEntityCode();
 
                     foreach( $review->getRatingVotes() as $vote) {
-                        $dataReviews[]['rating']   = number_format($vote->getPercent()*5/100);
+                        $dataReviewsItem['rating']   = number_format($vote->getPercent()*5/100);
                     }
+
+                    $dataReviews[] = $dataReviewsItem;
                 }
             }
         }
@@ -99,9 +103,11 @@ class ReviewManagement implements ReviewManagementInterface
      * Get product reviews with productId.
      *
      * @param string $productId
+     * @param int $curPage
+     * @param int $pageSize
      * @return ReviewInterface[]
      */
-    public function getProductReviewsWithProductId($productId)
+    public function getProductReviewsWithProductId($productId,$curPage,$pageSize)
     {
         // TODO: Implement getProductReviewsWithProductId() method.
         $dataReviews = [];
@@ -112,15 +118,13 @@ class ReviewManagement implements ReviewManagementInterface
 
                 $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
                 $reviewsColFactory = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
-                $reviews = $reviewsColFactory->addStoreFilter(
-                    $storeManager->getStore()->getId()
-                )->addStatusFilter(
-                    \Magento\Review\Model\Review::STATUS_APPROVED
-                )->addEntityFilter(
-                    'product',
-                    $product->getId()
-                )->setDateOrder()->addRateVotes();
-
+                $reviews = $reviewsColFactory->addStoreFilter($storeManager->getStore()->getId())
+                    ->addStatusFilter(\Magento\Review\Model\Review::STATUS_APPROVED)
+                    ->addEntityFilter('product',$product->getId())
+                    ->setCurPage($curPage)
+                    ->setPageSize($pageSize)
+                    ->setDateOrder()
+                    ->addRateVotes();
 
                 foreach ($reviews->getItems() as $key => $review) {
 

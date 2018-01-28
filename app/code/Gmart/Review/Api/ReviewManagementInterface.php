@@ -22,16 +22,20 @@ interface ReviewManagementInterface
      * Get product reviews with sku.
      *
      * @param string $sku
+     * @param int $curPage
+     * @param int $pageSize
      * @return ReviewInterface[]
      */
-    public function getProductReviews($sku);
+    public function getProductReviews($sku,$curPage,$pageSize);
 
 
     /**
      * Get product reviews with productId.
      *
      * @param string $productId
+     * @param int $curPage
+     * @param int $pageSize
      * @return ReviewInterface[]
      */
-    public function getProductReviewsWithProductId($productId);
+    public function getProductReviewsWithProductId($productId,$curPage,$pageSize);
 }
