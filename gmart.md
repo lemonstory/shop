@@ -1,6 +1,3 @@
-haha
-
-llll
 **环境相关**
 
     Your domain:                  shop.xiaoningmeng.net
@@ -23,8 +20,13 @@ llll
 
     visibility = 4 ： 搜索,及分类均可见
     status = 1 : 正常(Enabled)
-
-
+    
+    评论状态码
+    
+       status_id = 1: 审核通过 (Approved)
+       status_id = 2: 待审核 (Pending)
+       status_id = 3: 未审核通过 (Not Approved)
+           
 **客户**
 
     创建客户访问令牌(auth token)
@@ -121,34 +123,46 @@ llll
        catalogProductRepositoryV1
        GET /V1/products/:sku
        https://shop.xiaoningmeng.net/index.php/rest/V1/products/女孩衣服
-   
+       
+**商品属性信息**
+
+    根据属性id获取属性信息
+        catalogProductAttributeOptionManagementV1
+        GET /V1/products/attributes/{attributeCode}/options
+        https://shop.xiaoningmeng.net/index.php/rest/V1/products/attributes/141/options
 
 **商品评论**
      
      根据商品id获取评论
      GET /V1/gmart/products/id/{productId}/reviews
      https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews
-     
+     返回值：
+         [
+              {
+                  "review_id": "348",                                //评论id
+                  "created_at": "2018-01-27 13:29:00",               //评论创建时间
+                  "entity_id": "1",                                  //
+                  "entity_pk_value": "6",                            //实体id(商品id)
+                  "status_id": "1",                                  //评论状态(见 返回键值说明->评论状态码 )
+                  "detail_id": "348",                                //评论id
+                  "title": "看起来还不错",                             //评论标题
+                  "detail": "看起来还不错，看起来还不错，看起来还不错",      //评论内容
+                  "nickname": "帅帅",                                 //客户姓名
+                  "customer_id": null,                               //客户id (null 表示是游客)
+                  "entity_code": "product",                          //实体类型：商品
+                  "rating": "4"                                      //评级：4星
+              }
+             ...
+         ]
      
      根据商品sku获取评论
      GET /V1/gmart/products/{sku}/reviews
      https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews
-        [
-         {
-             "review_id": "348",
-             "created_at": "2018-01-27 13:29:00",
-             "entity_id": "1",
-             "entity_pk_value": "6",
-             "status_id": "1",
-             "detail_id": "348",
-             "title": "看起来还不错",
-             "detail": "看起来还不错，看起来还不错，看起来还不错",
-             "nickname": "帅帅",
-             "customer_id": null,
-             "entity_code": "product"
-         }
-         ...
-        ]
+     
+     
+     发布评论
+     
+
      
      
      

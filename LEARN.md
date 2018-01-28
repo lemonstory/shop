@@ -31,6 +31,9 @@
     //生成静态文件
     php bin/magento setup:static-content:deploy -f
     
+    //关闭module
+    php bin/magento module:disable Shopial_Facebook
+    
 *设置线上环境*
 
     php环境设置
