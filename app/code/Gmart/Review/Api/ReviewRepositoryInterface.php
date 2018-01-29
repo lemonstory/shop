@@ -10,6 +10,21 @@ namespace Gmart\Review\Api;
 
 interface ReviewRepositoryInterface
 {
+
+    /**
+     * post review
+     * @param int $productId
+     * @param int $customerId
+     * @param int $ratings
+     * @param string $nickname
+     * @param string $title
+     * @param string $detail
+     * @return mixed|void
+     * @internal param int $rating
+     */
+    public function post($productId,$customerId,$ratings,$nickname,$title,$detail
+    );
+
     /**
      * Save review.
      *

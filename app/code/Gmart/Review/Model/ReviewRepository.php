@@ -9,6 +9,9 @@
 namespace Gmart\Review\Model;
 
 use Gmart\Review\Api\ReviewRepositoryInterface;
+use Gmart\Review\Model\Review as GmartReview;
+use Magento\Framework\App\ObjectManager;
+use Magento\Review\Model\Review as Review;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product\Gallery\MimeTypeExtensionMap;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
@@ -34,6 +37,94 @@ use Magento\Framework\Exception\ValidatorException;
 class ReviewRepository implements ReviewRepositoryInterface
 {
 
+
+    /**
+     * @param int $productId
+     * @param int $customerId
+     * @param int $ratings
+     * @param string $nickname
+     * @param string $title
+     * @param string $detail
+     * @return mixed|void
+     * @throws InputException
+     * @internal param int $rating
+     */
+    public function post($productId,$customerId,$ratings,$nickname,$title,$detail) {
+
+        //这里搞的挫了
+        //没明白api 中array类型该如何传递和接收,故先硬编码来处理
+        //1颗星:$optionId = 16
+        //2颗星:$optionId = 17
+        //3颗星:$optionId = 18
+        //4颗星:$optionId = 19
+        //5颗星:$optionId = 20
+
+        if(intval($customerId) <= 0) {
+            $customerId = null;
+        }
+
+        $postData['ratings'][4] = $ratings + 15;
+        $postData['validate_rating'] = '';
+
+        $postData['nickname'] = $nickname;
+        $postData['title'] = $title;
+        $postData['detail'] = $detail;
+
+
+        $objectManager = ObjectManager::getInstance();
+        $product = $objectManager->create("Magento\Catalog\Model\Product")->load($productId);
+
+
+        if ($postData) {
+            $ratingArr = [];
+            if (isset($data['ratings']) && is_array($postData['ratings'])) {
+                $ratingArr = $postData['ratings'];
+            }
+        }
+
+        if ($product && !empty($postData)) {
+            /** @var \Magento\Review\Model\Review $review */
+            $review = $objectManager->create("Magento\Review\Model\Review")->setData($postData);
+            $review->unsetData('review_id');
+
+            $validate = $review->validate();
+            if ($validate === true) {
+                try {
+
+                    $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+                    $rating = $objectManager->create("Magento\Review\Model\Rating");
+
+                    $review->setEntityId($review->getEntityIdByCode(Review::ENTITY_PRODUCT_CODE))
+                        ->setEntityPkValue($product->getId())
+                        ->setStatusId(Review::STATUS_PENDING)
+                        ->setCustomerId($customerId)
+                        ->setStoreId($storeManager->getStore()->getId())
+                        ->setStores([$storeManager->getStore()->getId()])
+                        ->save();
+
+                    foreach ($ratingArr as $ratingId => $optionId) {
+                        $rating->setRatingId($ratingId)
+                            ->setReviewId($review->getId())
+                            ->setCustomerId($customerId)
+                            ->addOptionVote($optionId, $product->getId());
+                    }
+                    $review->aggregate();
+
+                    $data['message'] = "success";
+                    return $data;
+
+                } catch (\Exception $e) {
+                    throw new InputException(__('We can\'t post your review right now.',$e));
+                }
+            } else {
+                throw new InputException(__('Not a valid data'));
+            }
+        }else{
+            throw new InputException(__('Not a valid post data'));
+        }
+    }
+
+
     /**
      * Save review.
      *
@@ -44,6 +135,7 @@ class ReviewRepository implements ReviewRepositoryInterface
     public function save(\Gmart\Review\Api\Data\ReviewInterface $review)
     {
         // TODO: Implement save() method.
+
     }
 
     /**

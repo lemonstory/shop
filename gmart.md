@@ -14,7 +14,8 @@
 
 **资料**
 
-    http://devdocs.magento.com/swagger/#/
+    接口文档：http://devdocs.magento.com/swagger/#/
+    返回状态码：http://devdocs.magento.com/guides/v2.2/get-started/gs-web-api-response.html
 
 **返回键值说明**：
 
@@ -134,33 +135,40 @@
 **商品评论**
      
      根据商品id获取评论
-     GET /V1/gmart/products/id/{productId}/reviews/{curPage}/{pageSize}
-     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews/1/4
-     返回值：
-         [
-              {
-                  "review_id": "348",                                //评论id
-                  "created_at": "2018-01-27 13:29:00",               //评论创建时间
-                  "entity_id": "1",                                  //
-                  "entity_pk_value": "6",                            //实体id(商品id)
-                  "status_id": "1",                                  //评论状态(见 返回键值说明->评论状态码 )
-                  "detail_id": "348",                                //评论id
-                  "title": "看起来还不错",                             //评论标题
-                  "detail": "看起来还不错，看起来还不错，看起来还不错",      //评论内容
-                  "nickname": "帅帅",                                 //客户姓名
-                  "customer_id": null,                               //客户id (null 表示是游客)
-                  "entity_code": "product",                          //实体类型：商品
-                  "rating": "4"                                      //评级：4星
-              }
-             ...
-         ]
+         GET /V1/gmart/products/id/{productId}/reviews/{curPage}/{pageSize}
+         https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews/1/4
+         返回值：
+             [
+                  {
+                      "review_id": "348",                                //评论id
+                      "created_at": "2018-01-27 13:29:00",               //评论创建时间
+                      "entity_id": "1",                                  //
+                      "entity_pk_value": "6",                            //实体id(商品id)
+                      "status_id": "1",                                  //评论状态(见 返回键值说明->评论状态码 )
+                      "detail_id": "348",                                //评论id
+                      "title": "看起来还不错",                             //评论标题
+                      "detail": "看起来还不错，看起来还不错，看起来还不错",      //评论内容
+                      "nickname": "帅帅",                                 //客户姓名
+                      "customer_id": null,                               //客户id (null 表示是游客)
+                      "entity_code": "product",                          //实体类型：商品
+                      "rating": "4"                                      //评级：4星
+                  }
+                 ...
+             ]
      
      根据商品sku获取评论
-     GET /V1/gmart/products/{sku}/reviews/{curPage}/{pageSize}
-     https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews/1/4
+         GET /V1/gmart/products/{sku}/reviews/{curPage}/{pageSize}
+         https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews/1/4
      
      
      发布评论
+         POST /V1/gmart/review/product/post/id/{productId}
+         https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/review/product/post/id/6
+         返回值：
+            同上
+         
+         Authorization Bearer {token}
+         Content-Type application/json
      
 
      

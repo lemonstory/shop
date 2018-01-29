@@ -16,6 +16,14 @@
         </resources>
     </route>
 
+
+    <route url="/V1/gmart/review/product/post/id/:productId" method="POST">
+        <service class="Gmart\Review\Api\ReviewRepositoryInterface" method="post"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
     <route url="/V1/aaa/name/:name" method="GET">
         <service class="Gmart\Review\Api\HelloworldInterface" method="name"/>
         <resources>
