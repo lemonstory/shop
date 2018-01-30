@@ -3,4 +3,8 @@
     <event name="sales_quote_load_after">
         <observer name="gmart_mobileshop_sales_quote_load_after" instance="Gmart\Mobileshop\Observer\SalesQuoteLoadAfter" />
     </event>
+
+    <event name="sales_order_load_after">
+        <observer name="gmart_mobileshop_sales_order_load_after" instance="Gmart\Mobileshop\Observer\SalesOrderLoadAfter" />
+    </event>
 </config>

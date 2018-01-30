@@ -11,11 +11,16 @@
     地址接口中的region信息
     customer auth token 有效期
     
+**faq**
+
+    Magento: Difference between order states and statuses
+    http://ka.lpe.sh/2012/04/21/magento-order-state-vs-status/
 
 **资料**
 
     接口文档：http://devdocs.magento.com/swagger/#/
     返回状态码：http://devdocs.magento.com/guides/v2.2/get-started/gs-web-api-response.html
+    
 
 **返回键值说明**：
 
@@ -159,19 +164,24 @@
      根据商品sku获取评论
          GET /V1/gmart/products/{sku}/reviews/{curPage}/{pageSize}
          https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/24-MB02/reviews/1/4
+         返回值：
+            同上
      
      
      发布评论
          POST /V1/gmart/review/product/post/id/{productId}
          https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/review/product/post/id/6
-         返回值：
-            同上
+         
+         {
+             "ratings":1,           //评级：1：1颗星...5:5颗星
+             "customerId":0,        //客户Id 游客customerId=0
+             "nickname": "姓名555",  //客户姓名
+             "title": "简介啊啊啊",   //评论标题
+             "detail": "评论内容哈哈"  //评论内容
+         }
          
          Authorization Bearer {token}
          Content-Type application/json
-     
-
-     
      
      
 **购物车**
@@ -357,6 +367,20 @@
                 添加地址且将该地址设置为默认地址时：被添加项的default_shipping赋值为true即可
                 修改地址时：修改addresses的地址项,后发起put请求提交
                 删除地址时：删除addresses的地址项,后发起put请求提交
+                
+                
+**订单**
+        
+        获取客户订单列表
+            salesOrderRepositoryV1
+            GET /V1/orders
+            https://shop.xiaoningmeng.net/index.php/rest/V1/orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=2&searchCriteria[filterGroups][0][filters][0][conditionType]=eq                                                      
+             
+            Authorization Bearer {admin token}
+            Content-Type application/json
+        
+       
+   
         
     
 
