@@ -128,7 +128,16 @@
     根据SKU获取商品
        catalogProductRepositoryV1
        GET /V1/products/:sku
-       https://shop.xiaoningmeng.net/index.php/rest/V1/products/女孩衣服
+       https://shop.xiaoningmeng.net/index.php/rest/V1/products/WP13
+       
+       
+    获取configurable商品子产品信息
+        configurableProductLinkManagementV1
+        GET /V1/configurable-products/{sku}/children
+        https://shop.xiaoningmeng.net/index.php/rest/V1/configurable-products/XX001/children
+        
+        Authorization Bearer {customer token}
+        Content-Type application/json
        
 **商品属性信息**
 
@@ -218,6 +227,32 @@
                "product_type": "simple",   //商品
                "quote_id": "3"             //购物车id (获取购物车信息 id)
            }
+       }
+       
+       //参考：https://magento.stackexchange.com/questions/174997/magento-2-add-color-option-to-cart-rest-api
+       //完整的参数列表
+       {
+         "cartItem": {
+           "item_id": 0,
+           "sku": "string",
+           "qty": 0,
+           "name": "string",
+           "price": 0,
+           "product_type": "string",
+           "quote_id": "string",
+           "product_option": {
+           "extension_attributes": {
+              "configurable_item_options": [
+                {
+                 "option_id": "string",
+                 "option_value": 0,
+                 "extension_attributes": {}
+               }
+             ]
+           }
+         },
+         "extension_attributes": {}
+         }
        }
         
     修改购物车某一种商品数量(覆盖)
