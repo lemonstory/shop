@@ -138,6 +138,15 @@
         
         Authorization Bearer {customer token}
         Content-Type application/json
+        
+    商品搜索
+        catalogProductRepositoryV1
+        GET /V1/products
+        https://shop.xiaoningmeng.net/index.php/rest/V1/products?searchCriteria[filterGroups][0][filters][0][field]=name&searchCriteria[filterGroups][0][filters][0][value]=%豆干%&searchCriteria[filterGroups][0][filters][0][conditionType]=like&searchCriteria[sortOrders][0][field]=updated_at&searchCriteria[sortOrders][0][direction]=DESC&searchCriteria[pageSize]=20&searchCriteria[currentPage]=1
+        
+        备注：搜索关键字在Query String中的searchCriteria[filterGroups][0][filters][0][value]字段中.
+        
+        
        
 **商品属性信息**
 
@@ -158,7 +167,9 @@
      
      根据商品id获取评论
          GET /V1/gmart/products/id/{productId}/reviews/{curPage}/{pageSize}
-         https://shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews/1/4
+         https://
+         
+         shop.xiaoningmeng.net/index.php/rest/V1/gmart/products/id/6/reviews/1/4
          返回值：
              [
                   {
