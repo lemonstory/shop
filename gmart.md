@@ -145,6 +145,14 @@
         catalogProductAttributeOptionManagementV1
         GET /V1/products/attributes/{attributeCode}/options
         https://shop.xiaoningmeng.net/index.php/rest/V1/products/attributes/141/options
+        
+    商品sku返回的详情详情中的custom_attributes根据attribute_code获取default_frontend_label
+        catalogProductAttributeOptionManagementV1
+        GET /V1/products/attributes/options
+        https://shop.xiaoningmeng.net/index.php/rest/V1/products/attributes?searchCriteria[filterGroups][0][filters][0][field]=attribute_code&searchCriteria[filterGroups][0][filters][0][value]=%product_options_%&searchCriteria[filterGroups][0][filters][0][conditionType]=like
+        
+        //备注
+        
 
 **商品评论**
      
@@ -413,10 +421,12 @@
              
             Authorization Bearer {admin token}
             Content-Type application/json
+            
+        客户订单按条件(全部\待付款\待发货\已发货\待评价)筛选
         
-       
+            
+        
+               
    
-        
-    
 
 
