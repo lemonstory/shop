@@ -32,6 +32,18 @@
        status_id = 1: 审核通过 (Approved)
        status_id = 2: 待审核 (Pending)
        status_id = 3: 未审核通过 (Not Approved)
+       
+       
+**微信登录**
+
+    文档：
+        http://yj1438.github.io/2017/03/07/mini_program.html
+        https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html
+        https://mp.weixin.qq.com/debug/wxadoc/dev/api/open.html
+    
+    获取用户信息
+        GET /rest/V1/wxlogin/{code}/{encryptedData}/{iv}
+        https://shop.xiaoningmeng.net/rest/V1/wxlogin/aaabbbccc/aaaa/bbb
            
 **客户**
 

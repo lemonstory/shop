@@ -6,4 +6,9 @@
 <extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
     <attribute code="image_url" type="string" />
 </extension_attributes>
+<extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
+    <attribute code="image_url" type="string" />
+</extension_attributes>
+
+
 </config>
