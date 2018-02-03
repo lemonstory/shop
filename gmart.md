@@ -76,9 +76,22 @@
         GET /all/V1/categories
         https://shop.xiaoningmeng.net/index.php/rest/all/V1/categories
         
+    根据名称查询分类类别【TODO:后面应该携带商店信息】
+        catalogCategoryListV1
+        GET  /V1/categories
+        https://shop.xiaoningmeng.net/index.php/rest/V1/categories/list?searchCriteria[filterGroups][0][filters][0][field]=name&searchCriteria[filterGroups][0][filters][0][value]=%肉%&searchCriteria[filterGroups][0][filters][0][conditionType]=like&searchCriteria[sortOrders][0][field]=updated_at&searchCriteria[sortOrders][0][direction]=DESC&searchCriteria[pageSize]=20&searchCriteria[currentPage]=1
+        
+        
     获取分类下面的商品
-    
         GET /V1/products
+        https://shop.xiaoningmeng.net/index.php/rest/V1/products?searchCriteria[filterGroups][0][filters][0][field]=category_id&searchCriteria[filterGroups][0][filters][0][value]=52&searchCriteria[filterGroups][0][filters][0][conditionType]=in&searchCriteria[filterGroups][1][filters][0][value]=4&searchCriteria[filterGroups][1][filters][0][conditionType]=eq&searchCriteria[filterGroups][1][filters][0][field]=visibility
+    
+    获取分类下面的商品(按价格升序排列)
+    &searchCriteria[sortOrders][0][field]=updated_at&searchCriteria[sortOrders][0][direction]=DESC
+    
+    
+    获取分类下面的商品(按价格降序排列)
+        
         
     根据名称获取分类的信息
         catalogCategoryListV1

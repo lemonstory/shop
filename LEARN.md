@@ -40,3 +40,6 @@
         http://devdocs.magento.com/guides/v2.2/install-gde/prereq/php-settings.html
     cd <magento root>
     php bin/magento deploy:mode:set production
+    
+    
+*
