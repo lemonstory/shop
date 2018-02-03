@@ -9,7 +9,6 @@
 namespace Gmart\Mobileshop\Observer;
 
 use Gmart\Mobileshop\Model\ReviewOverview;
-use Gmart\Review\Model\Review;
 use Magento\Framework\Event\ObserverInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -51,6 +50,9 @@ class CatalogProductLoadAfter implements ObserverInterface
         $goodRatings = array();
         $dataReviewsItem = array();
         $total = count($reviews);
+        $overReview = new ReviewOverview();
+        $overReview->setTotal($total);
+
         if (count($reviews) > 0)
         {
             foreach ($reviews->getItems() as $key => $review) {
@@ -79,24 +81,23 @@ class CatalogProductLoadAfter implements ObserverInterface
                 }
             }
 //            $avg = array_sum($ratings)/count($ratings);
-            $avg = count($goodRatings)/count($ratings);
-        }
-        $review = new ReviewOverview();
-        $review->setTotal($total);
-        $review->setAvg($avg);
-        $review->setReviewId($dataReviewsItem['review_id']);
-        $review->setCreatedAt($dataReviewsItem['created_at']);
-        $review->setEntityId($dataReviewsItem['entity_id']);
-        $review->setEntityPkValue($dataReviewsItem['entity_pk_value']);
-        $review->setStatusId($dataReviewsItem['status_id']);
-        $review->setDetailId($dataReviewsItem['detail_id']);
-        $review->setTitle($dataReviewsItem['title']);
-        $review->setDetail($dataReviewsItem['detail']);
-        $review->setNickname($dataReviewsItem['nickname']);
-        $review->setCustomerId($dataReviewsItem['customer_id']);
-        $review->setEntityCode($dataReviewsItem['entity_code']);
 
-        $itemExtAttr->setReview($review);
+            $avg = count($goodRatings)/count($ratings);
+            $overReview->setAvg($avg);
+            $overReview->setReviewId($dataReviewsItem['review_id']);
+            $overReview->setCreatedAt($dataReviewsItem['created_at']);
+            $overReview->setEntityId($dataReviewsItem['entity_id']);
+            $overReview->setEntityPkValue($dataReviewsItem['entity_pk_value']);
+            $overReview->setStatusId($dataReviewsItem['status_id']);
+            $overReview->setDetailId($dataReviewsItem['detail_id']);
+            $overReview->setTitle($dataReviewsItem['title']);
+            $overReview->setDetail($dataReviewsItem['detail']);
+            $overReview->setNickname($dataReviewsItem['nickname']);
+            $overReview->setCustomerId($dataReviewsItem['customer_id']);
+            $overReview->setEntityCode($dataReviewsItem['entity_code']);
+        }
+
+        $itemExtAttr->setReview($overReview);
         $product->setExtensionAttributes($itemExtAttr);
     }
 }
