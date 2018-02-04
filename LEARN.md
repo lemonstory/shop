@@ -41,5 +41,29 @@
     cd <magento root>
     php bin/magento deploy:mode:set production
     
+*增加的模块*
     
-*
+    第三方登录
+        https://github.com/mageplaza/magento-2-social-login
+    
+    增加用户头像
+        https://github.com/euknyaz/magento2-customer-avatar-sm
+        composer require euknyaz/magento2-customer-avatar-sm:dev-master
+        
+        bash-4.2$ php bin/magento indexer:reindex
+        Design Config Grid index has been rebuilt successfully in 00:00:00
+        PHP Fatal error:  Uncaught Error: Call to undefined method Magento\Customer\Model\Indexer\Source::addAttributeToSelect() in /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Handler/AttributeHandler.php:38
+        Stack trace:
+        #0 /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Action/Base.php(310): Magento\Framework\Indexer\Handler\AttributeHandler->prepareSql(Object(Magento\Customer\Model\Indexer\Source), 'e', Array)
+        #1 /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Action/Entity.php(26): Magento\Framework\Indexer\Action\Base->createResultCollection()
+        #2 /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Action/Base.php(179): Magento\Framework\Indexer\Action\Entity->prepareDataSource(Array)
+        #3 /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Action/Base.php(189): Magento\Framework\Indexer\Action\Base->execute()
+        #4 /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/module-indexer/Model/Indexer.php(412): Magento\Framework\Indexer\Action\ in /data/wwwroot/shop.xiaoningmeng.net/vendor/magento/framework/Indexer/Handler/AttributeHandler.php on line 38
+
+    
+    
+
+*设置LastName可为空*
+    
+    UPDATE `eav_attribute` SET `is_required`=0 WHERE `attribute_code`='lastname'
+    https://magento.stackexchange.com/questions/176823/magento-2-how-to-make-lastname-optional-in-customer-registration-form
