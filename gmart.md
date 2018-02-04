@@ -273,6 +273,17 @@
            }
        }
        
+       //示例
+       {
+          "cartItem":{ 
+            "sku": "24-WB02",
+             "qty": 2,
+             "name": "Compete Track Tote",
+             "product_type": "simple",
+             "quote_id": "13"
+           }
+       }
+       
        //参考：https://magento.stackexchange.com/questions/174997/magento-2-add-color-option-to-cart-rest-api
        //完整的参数列表
        {
