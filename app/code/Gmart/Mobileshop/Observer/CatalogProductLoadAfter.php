@@ -39,7 +39,8 @@ class CatalogProductLoadAfter implements ObserverInterface
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
         $reviewsColFactory = $objectManager->get("Magento\Review\Model\ResourceModel\Review\Collection");
-        $reviews = $reviewsColFactory->addStoreFilter($storeManager->getStore()->getId())
+        //->addStoreFilter($storeManager->getStore()->getId())
+        $reviews = $reviewsColFactory
             ->addStatusFilter(\Magento\Review\Model\Review::STATUS_APPROVED)
             ->addEntityFilter('product',$product->getId())
             ->setDateOrder()
