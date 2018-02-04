@@ -288,7 +288,6 @@
        //完整的参数列表
        {
          "cartItem": {
-           "item_id": 0,
            "sku": "string",
            "qty": 0,
            "name": "string",
