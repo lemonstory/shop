@@ -63,6 +63,9 @@ class SalesQuoteLoadAfter implements ObserverInterface
         $this->extensionFactory = $extensionFactory;
     }
 
+    /**
+     * @param \Magento\Framework\Event\Observer $observer
+     */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $quote = $observer->getQuote();
@@ -72,13 +75,50 @@ class SalesQuoteLoadAfter implements ObserverInterface
          */
         foreach ($quote->getAllItems() as $quoteItem) {
             $product = $this->productRepository->create()->getById($quoteItem->getProductId());
+
             $itemExtAttr = $quoteItem->getExtensionAttributes();
             if ($itemExtAttr === null) {
                 $itemExtAttr = $this->extensionFactory->create();
             }
             $imageurl = $this->getImageUrl($product, 'product_thumbnail_image');
             $itemExtAttr->setImageUrl($imageurl);
+
+            $options = [];
+            $optionsItem = [];
+
+            $productSku = $quoteItem->getSku();
+            $productType = $quoteItem->getProductType();
+
+            if(strcmp($productType,'configurable') == 0) {
+                $productOptions = $product->getTypeInstance()->getConfigurableOptions($product);
+                foreach ($productOptions as $optionId => $productOptionItemArr) {
+                    foreach ($productOptionItemArr as $productOptionItem) {
+                        if(strcmp($productSku,$productOptionItem['sku']) == 0) {
+
+                            $optionsItem['option_id'] = $optionId;
+                            $optionsItem['option_value'] = $productOptionItem['value_index'];
+                            $optionsItem['option_label'] = $productOptionItem['option_title'];
+                        }
+                    }
+                    $options[] = $optionsItem;
+                }
+            }
+
+
+//            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//            $attributeCode = 141;
+//
+//            $eavAttributeRepository = $objectManager->create('Magento\Eav\Model\AttributeRepository');
+//
+//            $attributes = $eavAttributeRepository->get(\Magento\Catalog\Api\Data\ProductAttributeInterface::ENTITY_TYPE_CODE,$attributeCode);
+//            $options = $attributes->getSource()->getSpecificOptions([91,167],false);
+
+//            var_dump($options);
+//            exit;
+
+            $itemExtAttr->setOptions($options);
             $quoteItem->setExtensionAttributes($itemExtAttr);
+
         }
         return;
     }
