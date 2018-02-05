@@ -18,6 +18,7 @@ class ReviewOverview implements ReviewOverviewInterface
     protected $nickname;
     protected $customerId;
     protected $entityCode;
+    protected $rating;
 
 
     /**
@@ -179,6 +180,23 @@ class ReviewOverview implements ReviewOverviewInterface
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param int $rating
+     * @return mixed|void
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 
     /**

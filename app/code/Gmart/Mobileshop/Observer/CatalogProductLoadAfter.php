@@ -78,6 +78,9 @@ class CatalogProductLoadAfter implements ObserverInterface
                         $dataReviewsItem['nickname'] = $review->getNickname();
                         $dataReviewsItem['customer_id'] = $review->getCustomerId();
                         $dataReviewsItem['entity_code'] = $review->getEntityCode();
+                        foreach( $review->getRatingVotes() as $vote) {
+                            $dataReviewsItem['rating'] = number_format($vote->getPercent()*5/100);
+                        }
                     }
                 }
             }
@@ -92,6 +95,7 @@ class CatalogProductLoadAfter implements ObserverInterface
             $overReview->setStatusId($dataReviewsItem['status_id']);
             $overReview->setDetailId($dataReviewsItem['detail_id']);
             $overReview->setTitle($dataReviewsItem['title']);
+            $overReview->setRating($dataReviewsItem['rating']);
             $overReview->setDetail($dataReviewsItem['detail']);
             $overReview->setNickname($dataReviewsItem['nickname']);
             $overReview->setCustomerId($dataReviewsItem['customer_id']);
