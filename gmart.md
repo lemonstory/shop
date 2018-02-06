@@ -473,6 +473,17 @@
             
         
                
-   
+        获取订单详情
+            salesOrderRepositoryV1
+            GET: /V1/orders/{id}
+            
+            Authorization Bearer {admin token}
+            Content-Type application/json
+            
+            https://shop.xiaoningmeng.net/index.php/rest/V1/orders/10
+            
+            备注：id是订单列表数据中的entity_id
+            
+        
 
 
