@@ -241,7 +241,16 @@
     
     文档
     https://www.ipragmatech.com/magento-mobile-app-shopping-cart/
-
+    
+    创建空购物车
+        
+        quoteCartItemRepositoryV1
+        POST /V1/carts/mine
+        https://shop.xiaoningmeng.net/index.php/rest/V1/carts/mine
+    
+        Authorization Bearer {customer}
+        Content-Type application/json
+    
     获取购物车信息
         quoteCartManagementV1
         GET /V1/carts/mine
@@ -249,6 +258,9 @@
          
         Authorization Bearer {token}
         Content-Type application/json
+        
+        备注：
+            http statusCode 404 表示该用户无购物车 
         
     查看购物车中的商品
        quoteCartItemRepositoryV1
@@ -332,8 +344,83 @@
         Path参数
             itemId：购物车中商品id
             
-    清空购物车
+    
+    设置购物车账单地址[💣 有bug]
+    
+        quoteBillingAddressManagementV1
+        POST /V1/carts/mine/billing-address
+
+        {
+          "address": {
+            "id": 2,
+            "region": "陕西省",
+            "region_id": 0,
+            "region_code": "陕西省",
+            "country_id": "CN",
+            "street": [
+               "高新区",
+               "aa街bb路cc楼dd室"
+            ],
+            "telephone": "18600001111",
+            "postcode": "710065",
+            "city": "西安",
+            "firstname": "黄",
+            "lastname": "元",
+            "customer_id": 2
+          },
+          "useForShipping": true
+        }
         
+    设置购物车地址信息 [💣 有bug]
+     
+         checkoutShippingInformationManagementV1
+         POST /V1/carts/mine/shipping-information
+         
+         {
+           "addressInformation": {
+             "shipping_address": {
+                 "id": 2,
+                 "region": "陕西省",
+                 "region_id": 0,
+                 "region_code": "陕西省",
+                 "country_id": "CN",
+                 "street": [
+                    "高新区",
+                    "aa街bb路cc楼dd室"
+                 ],
+                 "telephone": "18600001111",
+                 "postcode": "710065",
+                 "city": "西安",
+                 "firstname": "黄",
+                 "lastname": "元",
+                 "customer_id": 2
+             },
+             
+             "billingAddress": {
+                 "id": 2,
+                 "region": "陕西省",
+                 "region_id": 0,
+                 "region_code": "陕西省",
+                 "country_id": "CN",
+                 "street": [
+                    "高新区",
+                    "aa街bb路cc楼dd室"
+                 ],
+                 "telephone": "18600001111",
+                 "postcode": "710065",
+                 "city": "西安",
+                 "firstname": "黄",
+                 "lastname": "元",
+                 "customer_id": 2
+             },
+             
+             "shipping_method_code": "flatrate",
+             "shipping_carrier_code": "flatrate",
+             "extension_attributes": {},
+             "custom_attributes": []
+           }
+         }
+
        
 **收获地址**
     
@@ -470,19 +557,63 @@
             
         客户订单按条件(全部\待付款\待发货\已发货\待评价)筛选
         
-            
-        
                
         获取订单详情
+        
             salesOrderRepositoryV1
             GET: /V1/orders/{id}
             
             Authorization Bearer {admin token}
             Content-Type application/json
-            
             https://shop.xiaoningmeng.net/index.php/rest/V1/orders/10
             
             备注：id是订单列表数据中的entity_id
+            
+            
+       下订单
+            
+            checkoutPaymentInformationManagementV1
+            POST /V1/carts/mine/payment-information
+            Authorization Bearer {customer token}
+            Content-Type application/json
+            
+            https://shop.xiaoningmeng.net/index.php/rest/default/V1/carts/mine/payment-information
+            
+            $body
+            {
+                "cartId": "24",             //购物车ID (/rest/V1/carts/mine id字段；/rest/V1/carts/mine/items quote_id字段)
+                "billingAddress": {
+                    "customerAddressId": "2",
+                    "countryId": "CN",
+                    "regionCode": "陕西省",
+                    "region": "陕西省",
+                    "customerId": "2",
+                    "street": [
+                        "高新区",
+                        "aa街bb路cc楼dd室"
+                    ],
+                    "telephone": "18600001111",
+                    "postcode": "710065",
+                    "city": "西安",
+                    "firstname": "黄",
+                    "lastname": "元",
+                    "extensionAttributes": {
+                        "checkoutFields": {}
+                    },
+                    "saveInAddressBook": null
+                },
+                "paymentMethod": {
+                    "method": "wxpay",
+                    "po_number": null,
+                    "additional_data": null
+                }
+            }
+            
+            
+            
+            
+        
+        
             
         
 
