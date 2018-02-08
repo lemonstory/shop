@@ -664,7 +664,25 @@
                 detail说明
                     https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_102&index=2
 
-       支付成功回调
+       修改订单状态
+            
+            salesOrderRepositoryV1
+            POST V1/orders
+                        
+            Authorization Bearer {customer token}
+            Content-Type application/json
+            
+            https://shop.xiaoningmeng.net/index.php/rest/V1/orders
+            
+            $body
+            {
+              "entity": {
+                "entity_id": 32,                //订单id
+                "status": "pending_payment",    //订单状态(见顶部 订单状态 说明)
+                "increment_id": "000000039"     //订单编号
+              }
+            }
+           
        
        
        
