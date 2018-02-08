@@ -574,6 +574,7 @@
             
             checkoutPaymentInformationManagementV1
             POST /V1/carts/mine/payment-information
+            
             Authorization Bearer {customer token}
             Content-Type application/json
             
@@ -612,12 +613,16 @@
        订单支付
        
             POST V1/mobileshop/wxpay
+            
+            Authorization Bearer {customer token}
+            Content-Type application/json
+            
             https://shop.xiaoningmeng.net/index.php/rest/V1/mobileshop/wxpay
             $body
             
                 {
                    "openId": "ol80I403ZlQ9nfyo2JyMh6GljSYo",    //微信open id
-                   "productId": 1,                              //商品Id
+                   "productId": 1,                              //商品Id(可选)
                    "orderNo": "111111",                         //订单Id
                    "body":"某某商品",                             //商品简单描述(见下面描述)
                    "totalFee":1,                                //订单金额(单位：分)
@@ -630,11 +635,5 @@
                 
                 detail说明
                     https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_102&index=2
-            
-            
-        
-        
-            
-        
 
 
