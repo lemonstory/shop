@@ -67,3 +67,20 @@
     
     UPDATE `eav_attribute` SET `is_required`=0 WHERE `attribute_code`='lastname'
     https://magento.stackexchange.com/questions/176823/magento-2-how-to-make-lastname-optional-in-customer-registration-form
+    
+    
+*TODO:*
+    
+    购物车列表返回规格信息，现在是个字符串，应该是对象合适
+    
+    {
+        "messages": {
+            "error": [
+                {
+                    "code": 500,
+                    "message": "Fatal Error: 'Allowed memory size of 792723456 bytes exhausted (tried to allocate 262144 bytes)' in '/data/wwwroot/shop.xiaoningmeng.net/app/code/Gmart/Mobileshop/Model/ConfigurableProductOption.php' on line 26",
+                    "trace": "Trace is not available."
+                }
+            ]
+        }
+    }

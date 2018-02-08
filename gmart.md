@@ -609,7 +609,27 @@
                 }
             }
             
+       订单支付
+       
+            POST V1/mobileshop/wxpay
+            https://shop.xiaoningmeng.net/index.php/rest/V1/mobileshop/wxpay
+            $body
             
+                {
+                   "openId": "ol80I403ZlQ9nfyo2JyMh6GljSYo",    //微信open id
+                   "productId": 1,                              //商品Id
+                   "orderNo": "111111",                         //订单Id
+                   "body":"某某商品",                             //商品简单描述(见下面描述)
+                   "totalFee":1,                                //订单金额(单位：分)
+                   "detail":""                                  //商品详细描述(可选)
+                }
+            
+            参考文档：
+                body说明
+                    https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2
+                
+                detail说明
+                    https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_102&index=2
             
             
         
