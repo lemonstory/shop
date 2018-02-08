@@ -33,6 +33,16 @@
        status_id = 2: 待审核 (Pending)
        status_id = 3: 未审核通过 (Not Approved)
        
+**订单状态**
+
+        state
+            pending_payment            待付款
+            pending_send_courier       待发货
+            pending_receive_courier    待收货/已发货
+            pending_review             待评价
+            complete                   已完成
+            closed                     已关闭
+            canceled                   已取消
        
 **微信登录**
 
@@ -555,8 +565,26 @@
             Authorization Bearer {admin token}
             Content-Type application/json
             
+        
         客户订单按条件(全部\待付款\待发货\已发货\待评价)筛选
         
+        
+            已发货
+        
+                https://shop.xiaoningmeng.net/index.php/rest/V1/orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=2&searchCriteria[filterGroups][0][filters][0][conditionType]=eq&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][1][filters][0][value]=pending_receive_courier&searchCriteria[filterGroups][1][filters][0][conditionType]=eq                                                      
+            
+            待付款
+                
+                https://shop.xiaoningmeng.net/index.php/rest/V1/orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=2&searchCriteria[filterGroups][0][filters][0][conditionType]=eq&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][1][filters][0][value]=pending_payment&searchCriteria[filterGroups][1][filters][0][conditionType]=eq                                                      
+
+            待发货
+                
+                https://shop.xiaoningmeng.net/index.php/rest/V1/orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=2&searchCriteria[filterGroups][0][filters][0][conditionType]=eq&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][1][filters][0][value]=pending_send_courier&searchCriteria[filterGroups][1][filters][0][conditionType]=eq                                                      
+
+            待评论
+                
+                https://shop.xiaoningmeng.net/index.php/rest/V1/orders?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=2&searchCriteria[filterGroups][0][filters][0][conditionType]=eq&searchCriteria[filterGroups][1][filters][0][field]=status&searchCriteria[filterGroups][1][filters][0][value]=pending_review&searchCriteria[filterGroups][1][filters][0][conditionType]=eq                                                      
+
                
         获取订单详情
         
@@ -636,4 +664,9 @@
                 detail说明
                     https://pay.weixin.qq.com/wiki/doc/api/danpin.php?chapter=9_102&index=2
 
+       支付成功回调
+       
+       
+       
+       
 
