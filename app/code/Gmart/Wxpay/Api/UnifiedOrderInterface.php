@@ -1,7 +1,7 @@
 <?php
 namespace Gmart\Wxpay\Api;
 
-interface PaymentInterface
+interface UnifiedOrderInterface
 {
 
     /**
