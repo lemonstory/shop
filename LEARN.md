@@ -33,6 +33,7 @@
     
     //关闭module
     php bin/magento module:disable Shopial_Facebook
+    php bin/magento module:disable Dotdigitalgroup_Email
     
 *设置线上环境*
 

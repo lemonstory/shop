@@ -1,7 +1,7 @@
 <?php
 namespace Gmart\Wxpay\Api;
 
-interface UnifiedOrderInterface
+interface OrderInterface
 {
 
     /**
@@ -17,4 +17,14 @@ interface UnifiedOrderInterface
      * @return object
      */
     public function generatePayOrder($openId,$productId,$orderNo,$body,$totalFee,$detail='');
+
+
+    /**
+     * 关闭微信订单
+     *
+     * @api
+     * @param string $orderNo   订单号
+     * @return object
+     */
+    public function closeOrder($orderNo);
 }

@@ -2,7 +2,7 @@
 
 namespace Gmart\Wxpay\Model;
 
-use Gmart\Wxpay\Api\UnifiedOrderInterface;
+use Gmart\Wxpay\Api\OrderInterface;
 use Magento\Framework\DataObject;
 use Magento\Payment\Model\InfoInterface;
 use \Magento\Payment\Model\MethodInterface;

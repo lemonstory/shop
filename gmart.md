@@ -5,6 +5,8 @@
     Directory of:                 /data/wwwroot/shop.xiaoningmeng.net
     Let's Encrypt SSL Certificate:/etc/letsencrypt/live/shop.xiaoningmeng.net/fullchain.pem
     SSL Private Key:              /etc/letsencrypt/live/shop.xiaoningmeng.net/privkey.pem
+    
+    安装的moudle
 
 **存在的问题**
 
@@ -258,7 +260,7 @@
         POST /V1/carts/mine
         https://shop.xiaoningmeng.net/index.php/rest/V1/carts/mine
     
-        Authorization Bearer {customer}
+        Authorization Bearer {customer token}
         Content-Type application/json
     
     获取购物车信息
@@ -682,7 +684,17 @@
                 "increment_id": "000000039"     //订单编号
               }
             }
-           
+            
+       关闭订单
+            
+            GET V1/mobileshop/wxpay/closeorder/{orderNo}
+            
+            Authorization Bearer {customer token}
+            Content-Type application/json
+                
+            https://shop.xiaoningmeng.net/index.php/rest/V1/mobileshop/wxpay/closeorder/1
+       
+       
        
        
        
